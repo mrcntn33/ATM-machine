@@ -16,18 +16,24 @@ root.configure(bg="#17161b")
 ##definition withdraw
 
 def withdraw_cash(cash):
+    confirm = messagebox.askyesno("confirm", "Do you confirm the withdrawal process?")
 
-    global balance
+    if confirm:
 
-    if balance >= cash:
-        confirm = messagebox.askyesno("confirm", "Do you confirm the withdrawal process?")
+        global balance
 
-        balance -= cash
-        label_result.config(text=f"BALANCE: {balance} TL")
-        messagebox.showinfo("info", f"BALANCE: {balance + cash} - {cash} \n\nNEW BALANCE: {balance} TL")
+        if balance >= cash:
+
+            balance -= cash
+            label_result.config(text=f"BALANCE: {balance} TL")
+            messagebox.showinfo("info", f"BALANCE: {balance + cash} - {cash} \n\nNEW BALANCE: {balance} TL")
+        else:
+            
+            messagebox.showinfo("info", "insufficient funds!")
+            
+            
     else:
-        messagebox.showinfo("info", "insufficient funds!")
-        label_result.config(text="insufficient funds!")
+        messagebox.showinfo("info" , "transaction cancelled")
 
 
 
@@ -38,13 +44,16 @@ def other_withdraw():
     cash = simpledialog.askfloat("withdraw", "Enter the amount you wish to withdraw:", minvalue=1)
 
     if cash is not None:
-        if balance >= cash:
-            confirm = messagebox.askyesno("confirm", "Do you confirm the withdrawal process?")
-            balance -= cash
-            label_result.config(text=f"BALANCE: {balance} TL")
-            messagebox.showinfo("info", f"BALANCE: {balance + cash} - {cash} \n\nNEW BALANCE: {balance} TL")
+        confirm = messagebox.askyesno("confirm", "Do you confirm the withdrawal process?")
+        if confirm:
+            if balance >= cash:
+                balance -= cash
+                label_result.config(text=f"BALANCE: {balance} TL")
+                messagebox.showinfo("info", f"BALANCE: {balance + cash} - {cash} \n\nNEW BALANCE: {balance} TL")
+            else:
+                messagebox.showinfo("info", "insufficient funds!")
         else:
-            messagebox.showinfo("info", "insufficient funds!")
+            messagebox.showinfo("info" , "transaction cancelled")
 
 
 
