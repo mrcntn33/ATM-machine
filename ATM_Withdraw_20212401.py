@@ -62,9 +62,10 @@ def other_withdraw():
 def exit_atm():
 
     exit = messagebox.askyesno("EXIT", "DO YOU WANT TO EXIT?:")
+    if exit:
     
     
-    root.destroy()
+        root.destroy()
 
 
 
